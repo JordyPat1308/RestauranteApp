@@ -70,17 +70,17 @@ app.listen(port, () => {
  const app = express();
 const cors = require('cors');
  const port = 8000;
- require('./serverMysql/config/sequelize.config')
+ require('./server/config/sequelize.config')
  app.use(cors()); // Habilitar CORS para todas las rutas
  app.use(express.json()); // Middleware para parsear JSON en el cuerpo de la solicitud
  app.use(express.urlencoded({ extended: true })); // Middleware para parsear datos de formularios
- const allRestauranteRoutes = require('./serverMysql/routes/restaurante.routes');
+ const allRestauranteRoutes = require('./server/routes/restaurante.routes');
  allRestauranteRoutes(app);
-const allTipoComidaRoutes = require('./serverMysql/routes/tipocomida.routes');
+const allTipoComidaRoutes = require('./server/routes/tipocomida.routes');
 allTipoComidaRoutes(app);
-const allMenuRoutes = require('./serverMysql/routes/menu.routes');
+const allMenuRoutes = require('./server/routes/menu.routes');
 allMenuRoutes(app);
-const allUsuarioRoutes = require('./serverMysql/routes/usuario.routes');
+const allUsuarioRoutes = require('./server/routes/usuario.routes');
 allUsuarioRoutes(app);
  app.listen(port,()=>{
     console.log("Server corriendo en el puerto: ",port);

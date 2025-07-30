@@ -8,9 +8,7 @@ module.exports.protect = async (req, res, next) => {
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         try {
             // se obtiene el token (p.ej., Bearer DJDHFHFHHFHFHF#%>%)
-            token = req.headers.authorization;
-            console.log('Token recibido-con Bearer: ', token);
-            token = token.split(' ')[1];
+            token = req.headers.authorization.split(' ')[1];
             console.log('Token extraído: ', token);
 
             // se verifica el token
@@ -18,15 +16,22 @@ module.exports.protect = async (req, res, next) => {
 
             // agregamos a cada petición información del usuario - excepto el password
             // (recuperado con base en el _id contenido en el payload del token)
-            req.user = await Usuario.findOne({ where: { id: decoded.id } });
+            req.user = await Usuario.findOne({ 
+                where: { id: decoded.id },
+                attributes: { exclude: ['password'] } // Excluir password por seguridad
+            });
+            
+            if (!req.user) {
+                return res.status(401).json({ message: 'User not found!' });
+            }
+            
             next();
         } catch (error) {
-            res.status(401).json({ message: 'Not authorized!' });
+            console.error('Error en middleware de autenticación:', error);
+            return res.status(401).json({ message: 'Not authorized, token failed!' });
         }
-    }
-
-    // si no se tiene un token de portador, entonces no estará autorizado
-    if (!token) {
-        res.status(401).json({ message: 'Not authorized, missed token!' });
+    } else {
+        // si no se tiene un token de portador, entonces no estará autorizado
+        return res.status(401).json({ message: 'Not authorized, no token provided!' });
     }
 };

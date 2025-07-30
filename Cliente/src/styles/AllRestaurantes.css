@@ -1,7 +1,7 @@
 /* Estilos para el componente AllRestaurantes */
 .all-restaurantes {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #E8F5E8 0%, #F1F8E9 50%, #F9FBE7 100%);
   padding: 20px;
   font-family: 'Arial', sans-serif;
   position: relative;
@@ -26,26 +26,27 @@
 }
 
 .boton-crear-restaurante {
-  background: white;
+  background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
   border: none;
   border-radius: 15px;
   padding: 15px 25px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 20px rgba(76, 175, 80, 0.3);
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 600;
-  color: #2c3e50;
+  color: white;
   font-size: 1rem;
 }
 
 .boton-crear-restaurante:hover {
   transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+  background: linear-gradient(135deg, #388E3C 0%, #4CAF50 100%);
 }
 
 .boton-crear-restaurante::before {

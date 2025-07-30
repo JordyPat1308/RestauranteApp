@@ -28,6 +28,9 @@ const sequelize = require('../config/sequelize.config');
         }
     },
     
+}, {
+    timestamps: false,
+    tableName: 'tipocomida'
 });
 module.exports = TipoComida;
 // Es una plantilla o estrutura, en el esquema de la colleccion,definimos un grupo de caracterisitcas que debe cumplir

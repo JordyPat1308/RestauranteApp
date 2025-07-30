@@ -14,8 +14,8 @@ module.exports.GetTiposComidasByRestaurante = async (request, response) => {
 
     try {
         const tiposComidas = await Menu.findAll({
-            where: { _id: request.params.restauranteId },
-            include: ['tipoComida']
+            where: { restauranteId: request.params.restauranteId },
+            include: ['TipoComida']
         });
         response.json(tiposComidas);
     } catch (err) {
@@ -26,7 +26,7 @@ module.exports.GetRestaurantesbyTipoComida = async (request, response) => {
     try {
         const restaurantes = await Menu.findAll({
             where: { tipoComidaId: request.params.tipoComidaId },
-            include: ['restaurante']
+            include: ['Restaurante']
         });
         response.json(restaurantes);
     } catch (err) {

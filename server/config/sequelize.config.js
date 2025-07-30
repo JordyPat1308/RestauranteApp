@@ -3,24 +3,50 @@ const username = 'root';
 const password = 'root';
 const bdd_name = 'RestaurantesDB';
 const hostName = 'localhost';
-// Conexión inicial sin especificar la base de datos
-const initialSequelize = new Sequelize(`mysql://${username}:${password}@localhost`);
 
-initialSequelize.query(`CREATE DATABASE IF NOT EXISTS ${bdd_name};`)
-    .then(() => console.log('BDD creada o ya existía'))
-    .catch((error) => {
+// Función para crear la base de datos si no existe
+const createDatabase = async () => {
+    const initialSequelize = new Sequelize(`mysql://${username}:${password}@${hostName}`);
+    
+    try {
+        await initialSequelize.query(`CREATE DATABASE IF NOT EXISTS ${bdd_name};`);
+        console.log('BDD creada o ya existía');
+        await initialSequelize.close();
+    } catch (error) {
         console.error('Error al crear la BDD', error);
-        process.exit(1); // Termina el proceso si hay un error
-    });
-// Conectar a la base de datos específica y sincronizar modelos
+        process.exit(1);
+    }
+};
+
+// Conectar a la base de datos específica
 const sequelize = new Sequelize(bdd_name, username, password, {
     host: hostName,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    logging: false, // Desactivar logs de SQL
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }
 });
-// Se sincroniza los modelos con la base de datos
-sequelize.sync().then(() => {
-    console.log('Base de datos sincronizada');
-}).catch(err => {
-    console.log('Error al sincronizar la BDD', err);
-});
+
+// Función para sincronizar los modelos
+const syncDatabase = async () => {
+    try {
+        await createDatabase();
+        await sequelize.authenticate();
+        console.log('Conexión a la base de datos establecida correctamente');
+        
+        await sequelize.sync({ alter: true });
+        console.log('Base de datos sincronizada');
+    } catch (error) {
+        console.error('Error al sincronizar la BDD:', error);
+        process.exit(1);
+    }
+};
+
+// Ejecutar la sincronización
+syncDatabase();
+
 module.exports = sequelize;

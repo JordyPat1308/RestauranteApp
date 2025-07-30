@@ -1,7 +1,7 @@
 /* Estilos para el componente AllUsuarios */
 .all-usuarios {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #E8F5E8 0%, #F1F8E9 50%, #F9FBE7 100%);
   padding: 20px;
   font-family: 'Arial', sans-serif;
   position: relative;
@@ -26,7 +26,7 @@
 }
 
 .boton-crear-usuario {
-  background: white;
+  background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
   border: none;
   border-radius: 15px;
   padding: 15px 25px;

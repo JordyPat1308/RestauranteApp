@@ -1,17 +1,24 @@
 import React from "react";
 import Usuario from './Usuario';
+import Navbar from './Navbar';
 import { useNavigate } from "react-router-dom";
 import "../styles/AllUsuarios.css";
 
 const AllUsuarios = ({usuarios, deleteUsuario}) => {
   const navigate = useNavigate();
-  const handlerRegresar = () => {
-    navigate("/");
-  }
+  
+  // Obtener información del usuario del localStorage
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   const handlerCrearUsuario = () => {
     navigate("/crearUsuario");
   }
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
 
   const handlerEliminar = (id) => {
     deleteUsuario(id);
@@ -19,6 +26,7 @@ const AllUsuarios = ({usuarios, deleteUsuario}) => {
 
   return (
     <div className="all-usuarios">
+      <Navbar user={user} onLogout={handleLogout} title="Gestión de Usuarios" />
       <div className="all-usuarios-container">
         <div className="header-section">
           <button className="boton-crear-usuario" onClick={handlerCrearUsuario}>
@@ -39,8 +47,6 @@ const AllUsuarios = ({usuarios, deleteUsuario}) => {
             />
           ))}
         </div>
-        
-        <button className="boton-regresar" onClick={handlerRegresar}>Go to home</button>
       </div>
     </div>
   );

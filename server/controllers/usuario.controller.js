@@ -111,7 +111,7 @@ module.exports.deleteUsuario = async (req, res) => {
 module.exports.loginUsuario = async (req, res) => {
     const { email, password } = req.body;
 
-    const userFound = await Usuario.findOne({ email });
+    const userFound = await Usuario.findOne({ where: { email } });
 
     //res.json({ message: 'Usuario encontrado: ', userFound });
 

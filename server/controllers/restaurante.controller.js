@@ -3,10 +3,10 @@ const Restaurantes = require('../models/restaurante.model');
 module.exports.CreateRestaurante = async (request, response) => {
     const { nombre, direccion, tipo, url, reputacion } = request.body;
     try {
-        const user = await Restaurantes.create({ nombre, direccion, tipo, url, reputacion });
-        response.json(user);
+        const restaurante = await Restaurantes.create({ nombre, direccion, tipo, url, reputacion });
+        response.json(restaurante);
     } catch (err) {
-        response.status(500).json({ message: 'No se pudo crear el usuario' });
+        response.status(500).json({ message: 'No se pudo crear el restaurante' });
         // response.status(500).json(err);
     }
 };

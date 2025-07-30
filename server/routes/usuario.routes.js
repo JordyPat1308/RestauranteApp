@@ -7,6 +7,6 @@ module.exports = function(app){
     app.get("/usuarios/:id", UsuarioController.getUsuariobyId);
     app.put("/usuarios/:id", UsuarioController.updateUsuario);
     app.delete("/usuarios/:id", UsuarioController.deleteUsuario);
-    app.post("/usuarios/login", protect, UsuarioController.loginUsuario);
+    app.post("/usuarios/login", UsuarioController.loginUsuario);
 
 };

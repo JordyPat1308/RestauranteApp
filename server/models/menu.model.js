@@ -22,17 +22,35 @@ const Menu = sequelize.define('menu', {
         allowNull: false,
         references: {
             model: TipoComida,
-            key: '_id' // Asegúrate que el modelo tipocomida tiene 'id' como PK
+            key: '_id'
         }
     }
 }, {
     timestamps: false
 });
 
-Restaurantes.belongsToMany(TipoComida, { through: Menu, foreignKey: 'restauranteId', otherKey: 'tipoComidaId' });
-TipoComida.belongsToMany(Restaurantes, { through: Menu, foreignKey: 'tipoComidaId', otherKey: 'restauranteId' });
+// Definir las asociaciones
+Menu.belongsTo(Restaurantes, { 
+    foreignKey: 'restauranteId',
+    as: 'Restaurante'
+});
 
-Menu.belongsTo(Restaurantes, { foreignKey: 'restauranteId' });
-Menu.belongsTo(TipoComida, { foreignKey: 'tipoComidaId' });
+Menu.belongsTo(TipoComida, { 
+    foreignKey: 'tipoComidaId',
+    as: 'TipoComida'
+});
+
+// Asociaciones many-to-many
+Restaurantes.belongsToMany(TipoComida, { 
+    through: Menu, 
+    foreignKey: 'restauranteId', 
+    otherKey: 'tipoComidaId' 
+});
+
+TipoComida.belongsToMany(Restaurantes, { 
+    through: Menu, 
+    foreignKey: 'tipoComidaId', 
+    otherKey: 'restauranteId' 
+});
 
 module.exports = Menu;

@@ -3,8 +3,12 @@ import AllRestaurantes from './Componentes/AllRestaurantes';
 import AllUsuarios from './Componentes/AllUsuarios';
 import AllTipoComidas from './Componentes/AllTipoComidas';
 import AllMenus from './Componentes/AllMenus';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Inicio from './Componentes/Inicio';
+import Login from './Componentes/Login';
+import Register from './Componentes/Register';
+import Dashboard from './Componentes/Dashboard';
+import ProtectedRoute from './Componentes/ProtectedRoute';
 import CrearRestauranteForm from './Componentes/CrearRestauranteForm';
 import CrearUsuarioForm from './Componentes/CrearUsuarioForm';
 import CrearTipoComidaForm from './Componentes/CrearTipoComidaForm';
@@ -22,8 +26,22 @@ function App(){
   const [lUsuarios, setlUsuarios] = useState([]);
   const [lTipoComidas, setlTipoComidas] = useState([]);
   const [lMenus, setlMenus] = useState([]);
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
+    // Verificar si hay un usuario autenticado al cargar la app
+    const token = localStorage.getItem('token');
+    const savedUser = localStorage.getItem('user');
+    
+    if (token && savedUser) {
+      setUser(JSON.parse(savedUser));
+      setIsAuthenticated(true);
+      loadData(); // Cargar datos solo si está autenticado
+    }
+  }, []);
+
+  const loadData = () => {
     // Cargar restaurantes
     axios.get('http://localhost:8000/restaurantes')
       .then(response => {
@@ -51,18 +69,30 @@ function App(){
         console.error("Error al cargar tipos de comida:", error);
       });
 
-    // Cargar menús - usando todos los menús en lugar de por restaurante
+    // Cargar menús
     axios.get('http://localhost:8000/menus')
       .then(response => {
-        // Si la API solo devuelve menús por restaurante, necesitaremos ajustar esto
-        // Por ahora asumimos que existe un endpoint para obtener todos los menús
         setlMenus(response.data);
       })
       .catch(error => {
         console.error("Error al cargar menús:", error);
-        // Si no existe el endpoint, puedes comentar esta parte o crear un endpoint genérico
       });
-  }, []);
+  };
+
+  const handleLogin = (userData) => {
+    setUser(userData);
+    setIsAuthenticated(true);
+    loadData(); // Cargar datos después del login
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    setIsAuthenticated(false);
+    setlRestaurantes([]);
+    setlUsuarios([]);
+    setlTipoComidas([]);
+    setlMenus([]);
+  };
 
   const addRestaurante = (nuevoRestaurante) => {
     axios.post('http://localhost:8000/restaurantes', nuevoRestaurante)
@@ -212,22 +242,85 @@ function App(){
 
   return (
     <div className='App'>
-      
-      
       <BrowserRouter>
         <Routes>
-          <Route path={""} element={<Inicio/>} />
-          <Route path={"/restaurantes"} element={<AllRestaurantes restaurantes={lRestaurantes} deleteRestaurante={eliminarRestaurante}/>} />
-          <Route path={"/crearRestaurante"} element={<CrearRestauranteForm handlerAgregar={addRestaurante} />} />
-          <Route path={"/editar/restaurante/:id"} element={<EditarRestauranteForm handlerEditar={actualizarRestaurante} restaurantes={lRestaurantes}/>} />
-          <Route path={"/usuarios"} element={<AllUsuarios usuarios={lUsuarios} deleteUsuario={eliminarUsuario} />} />
-          <Route path={"/crearUsuario"} element={<CrearUsuarioForm handlerAgregar={addUsuario} />} />
-          <Route path={"/editar/usuario/:id"} element={<EditarUsuarioForm handlerEditar={actualizarUsuario} usuarios={lUsuarios}/>} />
-          <Route path={"/tipocomidas"} element={<AllTipoComidas tipoComidas={lTipoComidas} deleteTipoComida={eliminarTipoComida} />} />
-          <Route path={"/crearTipoComida"} element={<CrearTipoComidaForm handlerAgregar={addTipoComida} />} />
-          <Route path={"/editar/tipocomida/:id"} element={<EditarTipoComidaForm handlerEditar={actualizarTipoComida} tipoComidas={lTipoComidas}/>} />
-          <Route path={"/menus"} element={<AllMenus menus={lMenus} eliminarMenu={eliminarMenu} restaurantes={lRestaurantes} tipoComidas={lTipoComidas} />} />
-          <Route path={"/crearMenu"} element={<CrearMenuForm handlerAgregar={addMenu} restaurantes={lRestaurantes} tipoComidas={lTipoComidas} />} />
+          {/* Rutas públicas */}
+          <Route path="/" element={!isAuthenticated ? <Inicio/> : <Navigate to="/dashboard" />} />
+          <Route path="/login" element={!isAuthenticated ? <Login onLogin={handleLogin} /> : <Navigate to="/dashboard" />} />
+          <Route path="/register" element={!isAuthenticated ? <Register onRegister={handleLogin} /> : <Navigate to="/dashboard" />} />
+          
+          {/* Rutas protegidas */}
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard user={user} onLogout={handleLogout} />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/restaurantes" element={
+            <ProtectedRoute>
+              <AllRestaurantes restaurantes={lRestaurantes} deleteRestaurante={eliminarRestaurante}/>
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/crearRestaurante" element={
+            <ProtectedRoute>
+              <CrearRestauranteForm handlerAgregar={addRestaurante} />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/editar/restaurante/:id" element={
+            <ProtectedRoute>
+              <EditarRestauranteForm handlerEditar={actualizarRestaurante} restaurantes={lRestaurantes}/>
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/usuarios" element={
+            <ProtectedRoute>
+              <AllUsuarios usuarios={lUsuarios} deleteUsuario={eliminarUsuario} />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/crearUsuario" element={
+            <ProtectedRoute>
+              <CrearUsuarioForm handlerAgregar={addUsuario} />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/editar/usuario/:id" element={
+            <ProtectedRoute>
+              <EditarUsuarioForm handlerEditar={actualizarUsuario} usuarios={lUsuarios}/>
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/tipocomidas" element={
+            <ProtectedRoute>
+              <AllTipoComidas tipoComidas={lTipoComidas} deleteTipoComida={eliminarTipoComida} />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/crearTipoComida" element={
+            <ProtectedRoute>
+              <CrearTipoComidaForm handlerAgregar={addTipoComida} />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/editar/tipocomida/:id" element={
+            <ProtectedRoute>
+              <EditarTipoComidaForm handlerEditar={actualizarTipoComida} tipoComidas={lTipoComidas}/>
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/menus" element={
+            <ProtectedRoute>
+              <AllMenus menus={lMenus} eliminarMenu={eliminarMenu} restaurantes={lRestaurantes} tipoComidas={lTipoComidas} />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/crearMenu" element={
+            <ProtectedRoute>
+              <CrearMenuForm handlerAgregar={addMenu} restaurantes={lRestaurantes} tipoComidas={lTipoComidas} />
+            </ProtectedRoute>
+          } />
         </Routes>
       </BrowserRouter>
     </div>

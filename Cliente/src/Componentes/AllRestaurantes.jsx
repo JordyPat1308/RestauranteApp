@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Restaurante from './Restaurante';
+import Navbar from './Navbar';
 import { useNavigate } from "react-router-dom";
 import "../styles/AllRestaurantes.css";
 
@@ -9,17 +10,21 @@ import "../styles/AllRestaurantes.css";
 const AllRestaurantes = ({restaurantes, deleteRestaurante}) => {
   const [likesTotales, setLikesTotales] = useState(0);
   const [mensajeError, setMensajeError] = useState("");
-
-
-
+  
   const navigate = useNavigate();
-  const handlerRegresar = () => {
-    navigate("/");
-  }
+  
+  // Obtener información del usuario del localStorage
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   const handlerCrearRestaurante = () => {
     navigate("/crearRestaurante");
   }
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
 
 
   const actualizarLikesTotales = () => {
@@ -54,6 +59,7 @@ const AllRestaurantes = ({restaurantes, deleteRestaurante}) => {
 
   return (
     <div className="all-restaurantes">
+      <Navbar user={user} onLogout={handleLogout} title="Gestión de Restaurantes" />
       <div className="all-restaurantes-container">
         <div className="header-section">
           <button className="boton-crear-restaurante" onClick={handlerCrearRestaurante}>
@@ -81,8 +87,6 @@ const AllRestaurantes = ({restaurantes, deleteRestaurante}) => {
             />
           ))}
         </div>
-        
-        <button className="boton-regresar" onClick={handlerRegresar}>Go to home</button>
       </div>
     </div>
   );
