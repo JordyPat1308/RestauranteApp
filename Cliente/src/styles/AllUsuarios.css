@@ -1,0 +1,175 @@
+/* Estilos para el componente AllUsuarios */
+.all-usuarios {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  position: relative;
+}
+
+.all-usuarios-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.boton-crear-usuario {
+  background: white;
+  border: none;
+  border-radius: 15px;
+  padding: 15px 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1rem;
+}
+
+.boton-crear-usuario:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.boton-crear-usuario::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2980b9);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.boton-crear-usuario:hover::before {
+  transform: scaleX(1);
+}
+
+.boton-crear-usuario:active {
+  transform: translateY(-1px);
+}
+
+.icono-crear {
+  font-size: 1.2rem;
+}
+
+.titulo-usuarios {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.mensaje-error {
+  color: #e74c3c;
+  font-size: 1.1rem;
+  margin: 10px 0;
+  font-weight: 500;
+  text-align: center;
+}
+
+.usuarios-grid {
+  margin: 30px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 20px;
+}
+
+.boton-regresar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 15px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.boton-regresar:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4c93 100%);
+}
+
+.boton-regresar:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .all-usuarios-container {
+    padding: 20px;
+  }
+  
+  .header-section {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .boton-crear-usuario {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .titulo-usuarios {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .usuarios-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .all-usuarios {
+    padding: 10px;
+  }
+  
+  .boton-crear-usuario {
+    padding: 10px 15px;
+    font-size: 0.8rem;
+  }
+  
+  .icono-crear {
+    font-size: 1rem;
+  }
+  
+  .titulo-usuarios {
+    font-size: 1.3rem;
+  }
+  
+  .usuarios-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
