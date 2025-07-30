@@ -13,7 +13,7 @@ const Login = ({ onLogin }) => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value  } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
