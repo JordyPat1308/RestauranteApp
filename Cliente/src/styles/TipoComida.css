@@ -1,12 +1,12 @@
-/* Estilos modernos para el componente TipoComida */
+/* Estilos para el componente TipoComida - Tema Amarillo, Negro y Blanco */
 .tipocomida-card {
-  background: white;
+  background: #FFFFFF;
   border-radius: 20px;
   padding: 0;
   margin: 20px 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease;
-  border: none;
+  border: 3px solid #FFD700;
   position: relative;
   overflow: hidden;
   max-width: 100%;
@@ -14,7 +14,8 @@
 
 .tipocomida-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+  border-color: #FFA500;
 }
 
 .tipocomida-card::before {
@@ -24,7 +25,7 @@
   left: 0;
   right: 0;
   height: 5px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, #FFD700, #FFA500);
   z-index: 1;
 }
 
@@ -32,7 +33,7 @@
   position: relative;
   height: 200px;
   overflow: hidden;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +45,7 @@
   left: 0;
   right: 0;
   background: linear-gradient(transparent, rgba(0,0,0,0.8));
-  color: white;
+  color: #FFD700;
   padding: 30px 20px 20px;
   z-index: 2;
 }

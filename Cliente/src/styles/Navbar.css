@@ -1,11 +1,12 @@
-/* Estilos para el componente Navbar */
+/* Estilos para el componente Navbar - Tema Amarillo, Negro y Blanco */
 .navbar {
-  background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
-  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
+  background: linear-gradient(135deg, #000000 0%, #333333 100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 0;
   z-index: 1000;
   margin-bottom: 20px;
+  border-bottom: 3px solid #FFD700;
 }
 
 .navbar-container {
@@ -26,20 +27,20 @@
 .navbar-logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: white;
+  color: #FFD700;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .navbar-logo:hover {
-  color: #C8E6C9;
+  color: #FFA500;
 }
 
 .navbar-title {
   font-size: 1.2rem;
-  color: #C8E6C9;
+  color: #FFFFFF;
   font-weight: 500;
-  border-left: 2px solid rgba(255, 255, 255, 0.3);
+  border-left: 2px solid #FFD700;
   padding-left: 20px;
 }
 

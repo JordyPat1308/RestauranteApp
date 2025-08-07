@@ -1,12 +1,12 @@
-/* Estilos para el componente Restaurante - Diseño Moderno */
+/* Estilos para el componente Restaurante - Tema Amarillo, Negro y Blanco */
 .restaurante-card {
-  background: white;
+  background: #FFFFFF;
   border-radius: 20px;
   padding: 0;
   margin: 20px 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease;
-  border: none;
+  border: 3px solid #FFD700;
   position: relative;
   overflow: hidden;
   max-width: 100%;
@@ -14,7 +14,8 @@
 
 .restaurante-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+  border-color: #FFA500;
 }
 
 .restaurante-card::before {
@@ -24,7 +25,7 @@
   left: 0;
   right: 0;
   height: 5px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, #FFD700, #FFA500);
   z-index: 1;
 }
 
@@ -32,6 +33,7 @@
   position: relative;
   height: 200px;
   overflow: hidden;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
 }
 
 .restaurante-info {
@@ -40,7 +42,7 @@
   left: 0;
   right: 0;
   background: linear-gradient(transparent, rgba(0,0,0,0.8));
-  color: white;
+  color: #FFD700;
   padding: 30px 20px 20px;
   z-index: 2;
 }
@@ -50,6 +52,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
+  opacity: 0.8;
 }
 
 .restaurante-card:hover .restaurante-imagen {
@@ -57,15 +60,15 @@
 }
 
 .restaurante-titulo {
-  color: white;
+  color: #FFD700;
   font-size: 1.6rem;
   margin: 0 0 8px 0;
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .restaurante-direccion {
-  color: rgba(255, 255, 255, 0.9);
+  color: #FFFFFF;
   font-size: 1rem;
   margin: 0 0 5px 0;
   font-weight: 400;
@@ -73,8 +76,8 @@
 
 .restaurante-tipo {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+  background: #FFD700;
+  color: #000000;
   font-size: 0.8rem;
   margin: 5px 0;
   font-weight: 600;
@@ -82,15 +85,15 @@
   letter-spacing: 0.5px;
   padding: 4px 12px;
   border-radius: 15px;
-  backdrop-filter: blur(10px);
+  border: 1px solid #000000;
 }
 
 .restaurante-reputacion {
-  color: #ffd700;
+  color: #FFD700;
   font-size: 1rem;
   margin: 5px 0 0 0;
   font-weight: bold;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .card-content {

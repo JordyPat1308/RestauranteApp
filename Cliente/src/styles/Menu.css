@@ -1,13 +1,13 @@
-/* Menu.css - Diseño Elegante y Sofisticado */
+/* Menu.css - Tema Amarillo, Negro y Blanco */
 .menu-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: #FFFFFF;
+    border: 2px solid #FFD700;
     border-radius: 16px;
     padding: 2rem;
     margin: 1rem 0;
     box-shadow: 
-        0 4px 6px -1px rgba(0, 0, 0, 0.1),
-        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        0 4px 6px -1px rgba(0, 0, 0, 0.2),
+        0 2px 4px -1px rgba(255, 215, 0, 0.1);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -21,9 +21,9 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-        rgba(99, 102, 241, 0.05) 0%, 
-        rgba(168, 85, 247, 0.05) 50%, 
-        rgba(236, 72, 153, 0.05) 100%);
+        rgba(255, 215, 0, 0.05) 0%, 
+        rgba(255, 165, 0, 0.05) 50%, 
+        rgba(255, 255, 0, 0.05) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -32,9 +32,9 @@
 .menu-card:hover {
     transform: translateY(-4px);
     box-shadow: 
-        0 20px 25px -5px rgba(0, 0, 0, 0.1),
-        0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    border-color: #c7d2fe;
+        0 20px 25px -5px rgba(255, 215, 0, 0.3),
+        0 10px 10px -5px rgba(0, 0, 0, 0.1);
+    border-color: #FFA500;
 }
 
 .menu-card:hover:before {
@@ -47,7 +47,7 @@
     margin-bottom: 1.5rem;
     gap: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid #f1f5f9;
+    border-bottom: 2px solid #FFD700;
 }
 
 .menu-avatar {

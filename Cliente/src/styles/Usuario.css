@@ -1,27 +1,29 @@
-/* Estilos modernos para el componente Usuario */
+/* Estilos para el componente Usuario - Tema Amarillo, Negro y Blanco */
 .usuario-card {
-  background: #ffffff;
+  background: #FFFFFF;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   transition: all 0.3s ease;
   margin: 16px 0;
-  border: 1px solid #e5e7eb;
+  border: 2px solid #FFD700;
 }
 
 .usuario-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
+  border-color: #FFA500;
 }
 
 /* Header del usuario */
 .usuario-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #000000 0%, #333333 100%);
   padding: 24px;
-  color: white;
+  color: #FFD700;
   display: flex;
   align-items: center;
   gap: 20px;
+  border-bottom: 2px solid #FFD700;
 }
 
 .avatar-container {
@@ -33,21 +35,23 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.3);
+  border: 3px solid #FFD700;
   object-fit: cover;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
+  background: #FFD700;
 }
 
 .status-badge {
   position: absolute;
   bottom: -4px;
   right: -4px;
-  background: #10b981;
-  color: white;
+  background: #FFD700;
+  color: #000000;
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 600;
+  border: 1px solid #000000;
   display: flex;
   align-items: center;
   gap: 4px;

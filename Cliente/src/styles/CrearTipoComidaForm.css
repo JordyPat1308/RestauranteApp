@@ -1,7 +1,7 @@
-/* Estilos para CrearTipoComidaForm */
+/* Estilos para CrearTipoComidaForm - Tema Amarillo, Negro y Blanco */
 .crear-tipocomida-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #000000 0%, #333333 100%);
   padding: 20px;
   display: flex;
   align-items: center;
@@ -10,14 +10,13 @@
 }
 
 .form-wrapper {
-  background: rgba(255, 255, 255, 0.95);
+  background: #FFFFFF;
   border-radius: 25px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   width: 100%;
   max-width: 600px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 3px solid #FFD700;
   position: relative;
 }
 
@@ -28,14 +27,14 @@
   left: 0;
   right: 0;
   height: 5px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, #FFD700, #FFA500);
 }
 
 .form-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #000000 0%, #333333 100%);
   padding: 40px 30px;
   text-align: center;
-  color: white;
+  color: #FFD700;
   position: relative;
 }
 
@@ -47,7 +46,7 @@
   align-items: center;
   justify-content: center;
   gap: 15px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .title-icon {

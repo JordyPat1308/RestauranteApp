@@ -7,6 +7,7 @@ const AllMenus = (props) => {
     const { menus, eliminarMenu, restaurantes, tipoComidas } = props;
     const [searchTerm, setSearchTerm] = useState("");
     const [filtroRestaurante, setFiltroRestaurante] = useState("");
+    const [filtroTipoComida, setFiltroTipoComida] = useState("");
 
     // Función para obtener información completa del menú
     const getMenuCompleto = (menu) => {
@@ -21,8 +22,16 @@ const AllMenus = (props) => {
         const coincideSearch = menuCompleto.restaurante?.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
                               menuCompleto.tipoComida?.nombre.toLowerCase().includes(searchTerm.toLowerCase());
         const coincideRestaurante = filtroRestaurante === "" || menu.restauranteId.toString() === filtroRestaurante;
-        return coincideSearch && coincideRestaurante;
+        const coincideTipoComida = filtroTipoComida === "" || menu.tipoComidaId.toString() === filtroTipoComida;
+        return coincideSearch && coincideRestaurante && coincideTipoComida;
     });
+
+    // Función para obtener restaurantes que sirven un tipo de comida específico
+    const getRestaurantesPorTipoComida = (tipoComidaId) => {
+        const menusDelTipo = menus.filter(menu => menu.tipoComidaId.toString() === tipoComidaId);
+        const restaurantesIds = [...new Set(menusDelTipo.map(menu => menu.restauranteId))];
+        return restaurantes.filter(restaurante => restaurantesIds.includes(restaurante._id));
+    };
 
     // Estadísticas
     const totalMenus = menus.length;
@@ -99,7 +108,44 @@ const AllMenus = (props) => {
                         </option>
                     ))}
                 </select>
+
+                <select 
+                    className="filter-select"
+                    value={filtroTipoComida}
+                    onChange={(e) => setFiltroTipoComida(e.target.value)}
+                >
+                    <option value="">Todos los tipos de comida</option>
+                    {tipoComidas.map(tipoComida => (
+                        <option key={tipoComida._id} value={tipoComida._id}>
+                            {tipoComida.nombre}
+                        </option>
+                    ))}
+                </select>
             </div>
+
+            {/* Mostrar restaurantes que sirven el tipo de comida seleccionado */}
+            {filtroTipoComida && (
+                <div className="restaurantes-tipo-comida">
+                    <h3 className="section-title">
+                        <span className="section-icon">🏪</span>
+                        Restaurantes que sirven {tipoComidas.find(t => t._id === filtroTipoComida)?.nombre}
+                    </h3>
+                    <div className="restaurantes-list">
+                        {getRestaurantesPorTipoComida(filtroTipoComida).map(restaurante => (
+                            <div key={restaurante._id} className="restaurante-card-mini">
+                                <div className="restaurante-info">
+                                    <h4>{restaurante.nombre}</h4>
+                                    <p>{restaurante.ciudad}</p>
+                                </div>
+                                <div className="restaurante-rating">
+                                    <span className="rating-stars">⭐</span>
+                                    <span className="rating-number">{restaurante.calificacion}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             {/* Lista de menús */}
             <div className="menus-content">

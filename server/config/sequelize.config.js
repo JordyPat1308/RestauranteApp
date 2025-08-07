@@ -38,7 +38,7 @@ const syncDatabase = async () => {
         await sequelize.authenticate();
         console.log('Conexión a la base de datos establecida correctamente');
         
-        await sequelize.sync({ alter: true });
+        await sequelize.sync({ force: true }); // Recrear tablas
         console.log('Base de datos sincronizada');
     } catch (error) {
         console.error('Error al sincronizar la BDD:', error);

@@ -1,5 +1,21 @@
+/* Paleta de colores: Amarillo, Negro y Blanco */
+:root {
+  --primary-yellow: #FFD700;
+  --secondary-yellow: #FFA500;
+  --light-yellow: #FFFF99;
+  --primary-black: #000000;
+  --secondary-black: #333333;
+  --light-gray: #666666;
+  --pure-white: #FFFFFF;
+  --off-white: #F8F8F8;
+}
+
 .App {
   text-align: center;
+  background-color: var(--pure-white);
+  color: var(--primary-black);
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -14,18 +30,53 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--primary-yellow);
+  border-bottom: 4px solid var(--primary-yellow);
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--primary-yellow);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.App-link:hover {
+  color: var(--secondary-yellow);
+}
+
+/* Botones generales */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--secondary-yellow) 100%);
+  border: 2px solid var(--primary-black);
+  color: var(--primary-black);
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--secondary-yellow) 0%, var(--primary-yellow) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.btn-secondary {
+  background-color: var(--pure-white);
+  border: 2px solid var(--primary-black);
+  color: var(--primary-black);
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-black);
+  color: var(--primary-yellow);
 }
 
 @keyframes App-logo-spin {
